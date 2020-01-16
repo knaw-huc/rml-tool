@@ -1,8 +1,8 @@
 package nl.knaw.huc.rmltool.rml.rmldata.termmaps;
 
-import nl.knaw.huc.rmltool.rml.Row;
 import nl.knaw.huc.rmltool.rml.dto.QuadPart;
 import nl.knaw.huc.rmltool.rml.dto.RdfUri;
+import nl.knaw.huc.rmltool.rml.Row;
 import nl.knaw.huc.rmltool.rml.dto.RdfValue;
 
 import java.util.Optional;

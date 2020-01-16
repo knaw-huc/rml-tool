@@ -1,9 +1,9 @@
 package nl.knaw.huc.rmltool.rml.rmldata.builders;
 
-import nl.knaw.huc.rmltool.rml.rmldata.RrPredicateObjectMapOfReferencingObjectMap;
 import nl.knaw.huc.rmltool.rml.rmldata.RrTriplesMap;
-import nl.knaw.huc.rmltool.rml.rmldata.termmaps.RrJoinCondition;
 import nl.knaw.huc.rmltool.rml.rmldata.termmaps.RrRefObjectMap;
+import nl.knaw.huc.rmltool.rml.rmldata.RrPredicateObjectMapOfReferencingObjectMap;
+import nl.knaw.huc.rmltool.rml.rmldata.termmaps.RrJoinCondition;
 
 import java.util.function.Function;
 

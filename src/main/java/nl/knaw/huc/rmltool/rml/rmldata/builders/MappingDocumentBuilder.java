@@ -7,6 +7,7 @@ import nl.knaw.huc.rmltool.rml.DataSource;
 import nl.knaw.huc.rmltool.rml.rdfshim.RdfResource;
 import nl.knaw.huc.rmltool.rml.rmldata.RmlMappingDocument;
 import nl.knaw.huc.rmltool.rml.rmldata.RrTriplesMap;
+import nl.knaw.huc.rmltool.rml.util.TopologicalSorter;
 import nl.knaw.huc.rmltool.util.Tuple;
 
 import java.util.ArrayList;
@@ -20,9 +21,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static nl.knaw.huc.rmltool.rml.util.TopologicalSorter.topologicalSort;
-import static nl.knaw.huc.rmltool.util.Tuple.tuple;
 
 public class MappingDocumentBuilder {
   private List<TriplesMapBuilder> tripleMapBuilders = new ArrayList<>();
@@ -50,7 +48,7 @@ public class MappingDocumentBuilder {
 
     Set<Multiset<TriplesMapBuilder>> cycles = detectCycles(triplesMapBuilders, lookup);
     List<TriplesMapBuilder> buildersListWithoutCycles = breakCycles(triplesMapBuilders, cycles);
-    return topologicalSort(buildersListWithoutCycles, lookup, ((currentChain, current, dependency) -> {
+    return TopologicalSorter.topologicalSort(buildersListWithoutCycles, lookup, ((currentChain, current, dependency) -> {
       //chains should no longer be possible
       throw new IllegalStateException("Chains detected");
     }), errors::add);
@@ -61,7 +59,7 @@ public class MappingDocumentBuilder {
   private Set<Multiset<TriplesMapBuilder>> detectCycles(List<TriplesMapBuilder> triplesMapBuilders,
                                                         Map<String, TriplesMapBuilder> lookup) {
     Set<Multiset<TriplesMapBuilder>> cycles = new HashSet<>();
-    topologicalSort(
+    TopologicalSorter.topologicalSort(
       triplesMapBuilders,
       lookup,
       ((currentChain, current, dependency) -> {
@@ -95,7 +93,7 @@ public class MappingDocumentBuilder {
       }
       //get the triplesMapBuilder that is currently taking part in most of the cycles
       triplesMapBuilders.stream()
-        .map(b -> tuple(b, cycleOccurrence.count(b)))
+        .map(b -> Tuple.tuple(b, cycleOccurrence.count(b)))
         .sorted(this::selectBestBreakCandidate)
         .map(Tuple::getLeft)
         .findFirst()
