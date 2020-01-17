@@ -1,0 +1,56 @@
+{
+  "@context": {
+    "rr": "http://www.w3.org/ns/r2rml#",
+    "rml": "http://semweb.mmlab.be/ns/rml#",
+    "tim": "http://timbuctoo.huygens.knaw.nl/mapping#"
+  },
+  "@graph": [
+    {
+      "@id": "http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/",
+      "rml:logicalSource": {
+        "rml:source": {
+          "tim:rawCollectionUri": {
+            "@id": "http://example.org/Sheet1"
+          },
+          "tim:customField": []
+        }
+      },
+      "rr:subjectMap": {
+        "rr:template": "http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/{Column1}",
+        "rr:class": {
+          "@id": "http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/"
+        }
+      },
+      "rr:predicateObjectMap": [
+        {
+          "rr:predicate": {
+            "@id": "http://schema.org/Column1"
+          },
+          "rr:objectMap": {
+            "rr:column": "Column1",
+            "rr:datatype": {
+              "@id": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "rr:termType": {
+              "@id": "rr:Literal"
+            }
+          }
+        },
+        {
+          "rr:predicate": {
+            "@id": "http://schema.org/Column2"
+          },
+          "rr:objectMap": {
+            "rr:column": "Column2",
+            "rr:datatype": {
+              "@id": "http://www.w3.org/2001/XMLSchema#string"
+            },
+            "rr:termType": {
+              "@id": "rr:Literal"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

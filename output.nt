@@ -1,0 +1,6 @@
+<http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/Value1.1> <http://schema.org/Column1> "Value1.1"^^http://www.w3.org/2001/XMLSchema#string .
+<http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/Value1.1> <http://schema.org/Column2> "Value1.2"^^http://www.w3.org/2001/XMLSchema#string .
+<http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/Value1.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/> .
+<http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/Value2.1> <http://schema.org/Column1> "Value2.1"^^http://www.w3.org/2001/XMLSchema#string .
+<http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/Value2.1> <http://schema.org/Column2> "Value2.2"^^http://www.w3.org/2001/XMLSchema#string .
+<http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/Value2.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://timbuctoo.huygens.knaw.nl/v5/data/test_sheet/Sheet1/> .

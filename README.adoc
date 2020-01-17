@@ -1,0 +1,16 @@
+= RML Mapper
+
+This converts Excel files to RDF, using RML.
+The code is extracted from https://github.com/HuygensING/timbuctoo, to make the functionality more generally available.
+
+== Testing the tool
+The tool uses Java 11
+
+. Clone the repository
+. Build the code: `mvn clean package`
+. Run the code:
+----
+./target/appassembler/bin/rmltool ./src/test/resources/nl/knaw/huc/rmltool/rml/datasource/excel/simplesheet.xlsx ./src/test/resources/nl/knaw/huc/rmltool/rml/datasource/excel/simplesheetmapping.json
+----
+
+You can validate the output in `output.nt`.
