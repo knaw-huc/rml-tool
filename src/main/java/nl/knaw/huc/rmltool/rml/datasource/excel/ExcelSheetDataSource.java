@@ -5,7 +5,8 @@ import com.google.common.collect.Lists;
 import nl.knaw.huc.rmltool.rml.DataSource;
 import nl.knaw.huc.rmltool.rml.ErrorHandler;
 import nl.knaw.huc.rmltool.rml.Row;
-import nl.knaw.huc.rmltool.rml.datasource.jexl.JexlRowFactory;
+import nl.knaw.huc.rmltool.rml.datasource.JoinHandler;
+import nl.knaw.huc.rmltool.rml.datasource.RowFactory;
 import nl.knaw.huc.rmltool.util.Tuple;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -22,11 +23,13 @@ public class ExcelSheetDataSource implements DataSource {
 
 
   private final Sheet sheet;
-  private final JexlRowFactory jexlRowFactory;
+  private final RowFactory rowFactory;
+  private final JoinHandler joinHandler;
 
-  public ExcelSheetDataSource(Sheet sheet, JexlRowFactory jexlRowFactory) {
+  public ExcelSheetDataSource(Sheet sheet, RowFactory rowFactory) {
     this.sheet = sheet;
-    this.jexlRowFactory = jexlRowFactory;
+    this.rowFactory = rowFactory;
+    joinHandler = rowFactory.getJoinHandler();
   }
 
   @Override
@@ -41,13 +44,14 @@ public class ExcelSheetDataSource implements DataSource {
                           final Map<String, String> values = headers
                               .stream()
                               .map(header -> tuple(header, headers.indexOf(header)))
+                              .filter(headerIndex-> row.getCell(headerIndex.getRight()) != null )
                               .map(headerIndex -> tuple(
                                   headerIndex.getLeft(),
                                   row.getCell(headerIndex.getRight()).getStringCellValue()
                               )).collect(Collectors.toMap(Tuple::getLeft, Tuple::getRight));
 
 
-                          return jexlRowFactory.makeRow(values, errorHandler);
+                          return rowFactory.makeRow(values, errorHandler);
                         });
   }
 
@@ -60,6 +64,6 @@ public class ExcelSheetDataSource implements DataSource {
 
   @Override
   public void willBeJoinedOn(String fieldName, String referenceJoinValue, String uri, String outputFieldName) {
-    throw new UnsupportedOperationException("Not yet implemented");//FIXME: implement
+    joinHandler.willBeJoinedOn(fieldName, referenceJoinValue, uri, outputFieldName);
   }
 }
