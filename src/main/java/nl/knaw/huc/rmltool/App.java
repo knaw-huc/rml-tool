@@ -45,7 +45,8 @@ public class App {
 
   private static String formatObject(QuadPart object) {
     if (object instanceof RdfValue) {
-      return "\"" + object.getContent() + "\"^^" + ((RdfValue) object).getLiteralType().get();
+      return String.format("\"%s\"^^<%s>",object.getContent().replaceAll("\"", "\\\\\""),
+          ((RdfValue) object).getLiteralType().get());
     }
 
     return "<" + object.getContent() + ">";
